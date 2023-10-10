@@ -1,3 +1,7 @@
+// TODOS: Add Quanta name logo for tablet and desktop
+// TODOS: Add atom logo for mobile
+// TODOS: Shift Register button to the main area on mobile because it is too cluttered
+
 import Link from 'next/link';
 
 interface MenuItem {
@@ -29,25 +33,20 @@ const Navbar = ({ links }: { links: MenuItem[] }) => {
 					</label>
 					<ul
 						tabIndex={0}
-						className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+						className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52 bg-blue-500"
 					>
-						<li>
-							<a>Item 1</a>
-						</li>
-						<li>
-							<a>Parent</a>
-							<ul className="p-2">
-								<li>
-									<a>Submenu 1</a>
+						{links.map((link) =>
+							links.indexOf(link) === links.length - 1 ? null : (
+								<li key={link.id}>
+									<Link
+										href={link.href}
+										className="rounded-xl hover:text-black font-medium px-4 py-3 hover:bg-blue-300 transition"
+									>
+										{link.name}
+									</Link>
 								</li>
-								<li>
-									<a>Submenu 2</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a>Item 3</a>
-						</li>
+							)
+						)}
 					</ul>
 				</div>
 				<a className="btn btn-ghost normal-case text-3xl font-extrabold">

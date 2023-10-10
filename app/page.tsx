@@ -21,8 +21,8 @@ const links = [
 	},
 	{
 		id: 4,
-		name: 'Projects',
-		href: '/projects',
+		name: 'Photo Galllery',
+		href: '/photo-gallery',
 	},
 	{
 		id: 5,
