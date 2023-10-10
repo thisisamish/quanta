@@ -5,7 +5,7 @@
 @media (min-width: 400px) {
 	.background-gradient::before {
 		background: radial-gradient(
-			20% 50% at 50% 50%,
+			30% 50% at 50% 50%,
 			rgba(71, 127, 247, 0.376) 0%,
 			rgba(37, 38, 44, 0) 100%
 		);
@@ -13,7 +13,24 @@
 		content: '';
 		position: absolute;
 		inset: 0px;
-		transform: scale(1);
 		pointer-events: none;
+		animation: 40s linear 1s infinite heartbeat;
+	}
+	@keyframes heartbeat {
+		0% {
+			transform: scale(0.5);
+		}
+		25% {
+			transform: scale(0.75);
+		}
+		50% {
+			transform: scale(1);
+		}
+		75% {
+			transform: scale(0.75);
+		}
+		100% {
+			transform: scale(0.5);
+		}
 	}
 }
