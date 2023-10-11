@@ -10,7 +10,7 @@ const GlitchEffect = () => {
 		undefined
 	);
 	const [word, setWord] = useState(words[0]);
-	const textRef = useRef(null);
+	const textRef = useRef<HTMLSpanElement>(null);
 
 	const handleMouseOver = () => {
 		let iteration = 0;
@@ -19,19 +19,20 @@ const GlitchEffect = () => {
 		clearInterval(intervalId);
 
 		const newIntervalId = setInterval(() => {
-			const currentText = textRef.current!.innerText;
-			textRef.current!.innerText = currentText
+			const el = textRef.current as HTMLSpanElement;
+			const elDatasetValue = el.dataset.value as string;
+			el.innerText = el.innerText
 				.split('')
 				.map((letter, index) => {
 					if (index < iteration) {
-						return textRef.current!.dataset.value[index];
+						return elDatasetValue[index];
 					}
 
 					return letters[Math.floor(Math.random() * 26)];
 				})
 				.join('');
 
-			if (iteration >= textRef.current!.dataset.value.length) {
+			if (iteration >= elDatasetValue.length) {
 				clearInterval(newIntervalId);
 			}
 
