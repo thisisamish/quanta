@@ -34,7 +34,7 @@
 		rgba(71, 127, 247, 0.376) 0%,
 		rgba(37, 38, 44, 0) 70%
 	);
-	animation: 10s linear 1s infinite heartbeat;
+	animation: 10s linear 0s infinite heartbeat;
 }
 
 @keyframes heartbeat {
