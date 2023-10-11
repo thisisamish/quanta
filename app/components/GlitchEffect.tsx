@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState, useRef, useEffect } from 'react';
 
 let words = ['Robotics', 'AI', 'Arduino', 'Figma', 'React.js'];

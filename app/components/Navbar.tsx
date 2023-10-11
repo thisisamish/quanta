@@ -3,6 +3,7 @@
 // TODOS: Shift Register button to the main area on mobile because it is too cluttered
 
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 interface MenuItem {
 	id: number;
@@ -12,7 +13,16 @@ interface MenuItem {
 
 const Navbar = ({ links }: { links: MenuItem[] }) => {
 	return (
-		<div className="navbar bg-base-100">
+		<motion.div
+			initial={{ opacity: 0, y: 40 }}
+			animate={{ opacity: 1, y: 0 }}
+			transition={{
+				delay: 0.15,
+				duration: 0.95,
+				ease: [0.165, 0.84, 0.44, 1],
+			}}
+			className="navbar bg-base-100"
+		>
 			<div className="navbar-start">
 				<div className="dropdown">
 					<label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -72,12 +82,12 @@ const Navbar = ({ links }: { links: MenuItem[] }) => {
 			<div className="navbar-end">
 				<Link
 					href={links[links.length - 1].href}
-					className="btn bg-blue-600 rounded-xl text-white font-medium px-4 py-3 ml-4 hover:bg-blue-500 transition"
+					className="bg-blue-600 rounded-xl text-white px-4 py-3 ml-4 hover:bg-blue-500 transition"
 				>
 					{links[links.length - 1].name}
 				</Link>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 
