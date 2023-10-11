@@ -1,48 +1,51 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useState, useRef } from 'react';
 
-const words = ['Robotics', 'Machine Learning', 'Arduino', 'Figma', 'React.js'];
+const words = ['Robotics', 'AI', 'Arduino', 'Figma', 'React.js'];
 
 const GlitchEffect = () => {
-	// useEffect(() => {
-	// 	const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	// 	setInterval(() => {
-	// 		for (let i = 0; i < words.length; i++) {
-	// 			const el = document.getElementById('glitch');
-	// 			if (el) {
-	// 				el.dataset.value = words[i];
-	// 				el.innerText = words[i];
-	// 			}
-	// 		}
-	// 	}, 500);
+	const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	const [intervalId, setIntervalId] = useState<NodeJS.Timeout | undefined>(
+		undefined
+	);
+	const [word, setWord] = useState(words[0]);
+	const textRef = useRef(null);
 
-		// let interval: number | undefined = undefined;
+	const handleMouseOver = () => {
+		let iteration = 0;
+		setWord((prev) => words[(words.indexOf(prev) + 1) % words.length]);
 
-		// let iteration = 0;
+		clearInterval(intervalId);
 
-		// clearInterval(interval);
+		const newIntervalId = setInterval(() => {
+			const currentText = textRef.current!.innerText;
+			textRef.current!.innerText = currentText
+				.split('')
+				.map((letter, index) => {
+					if (index < iteration) {
+						return textRef.current!.dataset.value[index];
+					}
 
-		// interval = setInterval(() => {
-		// 	event.target.innerText = event.target.innerText
-		// 		.split('')
-		// 		.map((letter, index) => {
-		// 			if (index < iteration) {
-		// 				return event.target.dataset.value[index];
-		// 			}
+					return letters[Math.floor(Math.random() * 26)];
+				})
+				.join('');
 
-		// 			return letters[Math.floor(Math.random() * 26)];
-		// 		})
-		// 		.join('');
+			if (iteration >= textRef.current!.dataset.value.length) {
+				clearInterval(newIntervalId);
+			}
 
-		// 	if (iteration >= event.target.dataset.value.length) {
-		// 		clearInterval(interval);
-		// 	}
+			iteration += 1 / 3;
+		}, 30);
 
-		// 	iteration += 1 / 3;
-		// }, 30);
-	// }, []);
-	return <span id="glitch">GlitchEffect</span>;
+		setIntervalId(newIntervalId);
+	};
+
+	return (
+		<span ref={textRef} data-value={word} onMouseOver={handleMouseOver}>
+			{word}
+		</span>
+	);
 };
 
 export default GlitchEffect;

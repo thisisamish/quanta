@@ -1,6 +1,7 @@
 import SquigglyLines from './components/SquigglyLines';
 import Navbar from './components/Navbar';
 import GlitchEffect from './components/GlitchEffect';
+import HoverEffect from './components/HoverEffect';
 // import Footer from '../components/Footer';
 
 const links = [
@@ -34,8 +35,9 @@ const links = [
 export default function HomePage() {
 	return (
 		<div className="flex max-w-6xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
+			<HoverEffect />
 			<Navbar links={links} />
-			<main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 sm:mt-16 mt-16 background-gradient">
+			<main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 sm:mt-16 mt-16">
 				<h1 className="mx-auto max-w-4xl font-display text-5xl font-bold tracking-normal text-gray-300 sm:text-7xl">
 					Exploring{' '}
 					<span className="relative whitespace-nowrap text-blue-600">
