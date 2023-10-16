@@ -10,19 +10,10 @@ const HoverEffect = () => {
 		x: 0,
 		y: 0,
 	});
-
-	const handleMouseMove: React.MouseEventHandler<HTMLDivElement> = (
-		e: React.MouseEvent<HTMLDivElement, MouseEvent>
-	) => {
-		const x = e.clientX;
-		const y = e.clientY;
-		setCursorPosition({ x, y });
+	const handleMouseMove = (event: MouseEvent) => {
+		setCursorPosition({ x: event.clientX, y: event.clientY });
 	};
-
 	useEffect(() => {
-		const handleMouseMove = (event: MouseEvent) => {
-			setCursorPosition({ x: event.clientX, y: event.clientY });
-		};
 		window.addEventListener('mousemove', handleMouseMove);
 
 		return () => {
@@ -31,7 +22,7 @@ const HoverEffect = () => {
 	}, []);
 
 	return (
-		<div className="hover-container" onMouseMove={handleMouseMove}>
+		<div className="hover-container">
 			<div
 				className="hover-effect"
 				style={{
