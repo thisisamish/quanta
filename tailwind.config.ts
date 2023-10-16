@@ -6,6 +6,13 @@ const config: Config = {
 		'./components/**/*.{js,ts,jsx,tsx,mdx}',
 		'./app/**/*.{js,ts,jsx,tsx,mdx}',
 	],
+	theme: {
+		extend: {
+			colors: {
+				background: "#000",
+			},
+		},
+	},
 	daisyui: {
 		themes: [], // true: all themes | false: only light + dark | array: specific themes like this ["light", "dark", "cupcake"]
 		darkTheme: 'dark', // name of one of the included themes for dark mode
