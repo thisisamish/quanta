@@ -9,6 +9,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import team from '../public/team.jpg';
+import DeptCard from './components/DeptCard';
+import { Design, Web, Technical } from './components/Icons';
 
 const links = [
 	{
@@ -35,6 +37,33 @@ const links = [
 		id: 5,
 		name: 'Register For Recruitments',
 		href: '/register',
+	},
+];
+
+const deptData = [
+	{
+		id: 1,
+		title: 'Technical',
+		description:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad odio, voluptates atque consequuntur facilis explicabo. Est ipsum, voluptate non vitae dolores provident, neque perferendis quos, distinctio explicabo tempore repellendus reiciendis?',
+		icon: Technical,
+		image: 'hello',
+	},
+	{
+		id: 2,
+		title: 'Design',
+		description:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad odio, voluptates atque consequuntur facilis explicabo. Est ipsum, voluptate non vitae dolores provident, neque perferendis quos, distinctio explicabo tempore repellendus reiciendis?',
+		icon: Design,
+		image: 'hello',
+	},
+	{
+		id: 3,
+		title: 'Web',
+		description:
+			'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad odio, voluptates atque consequuntur facilis explicabo. Est ipsum, voluptate non vitae dolores provident, neque perferendis quos, distinctio explicabo tempore repellendus reiciendis?',
+		icon: Web,
+		image: 'hello',
 	},
 ];
 
@@ -113,6 +142,13 @@ export default function HomePage() {
 							See The Team
 						</Link>
 					</div>
+				</div>
+			</div>
+			<div className="min-h-screen flex items-center justify-center">
+				<div className="flex flex-wrap gap-8">
+					{deptData.map((dept) => (
+						<DeptCard key={dept.id} {...dept} />
+					))}
 				</div>
 			</div>
 		</>
