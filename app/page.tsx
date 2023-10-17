@@ -112,7 +112,7 @@ export default function HomePage() {
 							duration: 0.95,
 							ease: [0.165, 0.84, 0.44, 1],
 						}}
-						className="mx-auto mt-12 max-w-xl text-lg sm:text-gray-400  text-gray-500 leading-7"
+						className="mx-auto mt-12 max-w-xl text-lg sm:text-gray-400 text-gray-500 leading-7"
 					>
 						We&apos;re the official technical society of the
 						Department of Electronics and Communication Engineering
@@ -120,7 +120,7 @@ export default function HomePage() {
 					</motion.h2>
 				</main>
 			</div>
-			<div className="bg-gradient-to-b from-background via-[#34373f] via-40% to-white min-h-screen flex justify-center items-center">
+			<div className="min-h-screen flex justify-center items-center">
 				<div className="mx-auto px-2 max-w-6xl flex flex-col lg:flex-row gap-4 lg:gap-8 justify-center items-center">
 					<Image
 						src={team}
@@ -128,7 +128,7 @@ export default function HomePage() {
 						className="sm:max-w-xl md:max-w-2xl lg:max-w-3xl rounded-2xl grow-[0.7]"
 					></Image>
 					<div className="grow-[0.3] flex flex-col justify-center items-center lg:items-start">
-						<p className="text-center lg:text-left text-lg mb-8 max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl">
+						<p className="text-center lg:text-left text-lg mb-8 max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl sm:text-gray-400 text-gray-500">
 							Lorem ipsum, dolor sit amet consectetur adipisicing
 							elit. Possimus, temporibus numquam harum nemo ut
 							modi sit incidunt sed consectetur perspiciatis eaque
