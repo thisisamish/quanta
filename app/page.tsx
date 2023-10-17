@@ -11,6 +11,7 @@ import Link from 'next/link';
 import team from '../public/team.jpg';
 import DeptCard from './components/DeptCard';
 import { Design, Web, Technical } from './components/Icons';
+import Footer from './components/Footer';
 
 const links = [
 	{
@@ -151,6 +152,7 @@ export default function HomePage() {
 					))}
 				</div>
 			</div>
+			<Footer />
 		</>
 	);
 }
