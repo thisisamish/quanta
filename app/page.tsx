@@ -1,45 +1,15 @@
-'use client';
-
-import SquigglyLines from './components/SquigglyLines';
-import Navbar from './components/Navbar';
-// import GlitchEffect from './components/GlitchEffect';
-import TechChangeEffect from './components/TechChangeEffect';
-import HoverEffect from './components/HoverEffect';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import team from '../public/team.jpg';
 import DeptCard from './components/DeptCard';
-import { Design, Web, Technical } from './components/Icons';
 import Footer from './components/Footer';
-
-const links = [
-	{
-		id: 1,
-		name: 'Home',
-		href: '/',
-	},
-	{
-		id: 2,
-		name: 'The Team',
-		href: '/team',
-	},
-	{
-		id: 3,
-		name: 'Resources',
-		href: '/resources',
-	},
-	{
-		id: 4,
-		name: 'Photo Galllery',
-		href: '/photo-gallery',
-	},
-	{
-		id: 5,
-		name: 'Register For Recruitments',
-		href: '/register',
-	},
-];
+import HoverEffect from './components/HoverEffect';
+import { Design, Technical, Web } from './components/Icons';
+import SquigglyLines from './components/SquigglyLines';
+// import GlitchEffect from './components/GlitchEffect';
+import TechChangeEffect from './components/TechChangeEffect';
+import * as motion from './lib/framer';
 
 const deptData = [
 	{

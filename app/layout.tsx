@@ -1,7 +1,10 @@
 import './globals.css';
-import type { Metadata } from 'next';
+
 import { Inter } from 'next/font/google';
 
+import Navbar from './components/Navbar';
+
+import type { Metadata } from 'next';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -9,6 +12,34 @@ export const metadata: Metadata = {
 	description:
 		'The official society of the Department of Electronics and Communication Engineering, JSSATE, Noida',
 };
+
+const links = [
+	{
+		id: 1,
+		name: 'Home',
+		href: '/',
+	},
+	{
+		id: 2,
+		name: 'The Team',
+		href: '/team',
+	},
+	{
+		id: 3,
+		name: 'Resources',
+		href: '/resources',
+	},
+	{
+		id: 4,
+		name: 'Photo Galllery',
+		href: '/photo-gallery',
+	},
+	{
+		id: 5,
+		name: 'Register For Recruitments',
+		href: '/register',
+	},
+];
 
 export default function RootLayout({
 	children,
@@ -18,6 +49,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${inter.className} bg-background text-white`}>
+				<Navbar links={links} />
 				{children}
 			</body>
 		</html>
