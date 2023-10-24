@@ -1,36 +1,30 @@
-import { useState, useEffect } from 'react';
+'use client';
 
-interface MousePosition {
-	x: number;
-	y: number;
-}
+import { useEffect, useRef } from 'react';
 
 const HoverEffect = () => {
-	const [cursorPosition, setCursorPosition] = useState<MousePosition>({
-		x: 0,
-		y: 0,
-	});
-	const handleMouseMove = (event: MouseEvent) => {
-		setCursorPosition({ x: event.clientX, y: event.clientY });
-	};
+	const blobRef = useRef<HTMLDivElement>(null);
 	useEffect(() => {
-		window.addEventListener('mousemove', handleMouseMove);
+		const blob = blobRef.current;
 
-		return () => {
-			window.removeEventListener('mousemove', handleMouseMove);
+		window.onpointermove = (event) => {
+			const { clientX, clientY } = event;
+			if (blob) {
+				blob.animate(
+					{
+						left: `${clientX}px`,
+						top: `${clientY}px`,
+					},
+					{ duration: 2000, fill: 'forwards' }
+				);
+			}
 		};
 	}, []);
 
 	return (
-		<div className="hover-container">
-			<div
-				className="hover-effect"
-				style={{
-					left: cursorPosition.x + 'px',
-					top: cursorPosition.y + 'px',
-				}}
-			></div>
-		</div>
+		<>
+			<div className="blob" ref={blobRef}></div>
+		</>
 	);
 };
 
