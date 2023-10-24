@@ -11,6 +11,11 @@ export const metadata: Metadata = {
 	title: 'Quanta JSS',
 	description:
 		'The official society of the Department of Electronics and Communication Engineering, JSSATE, Noida',
+	viewport: {
+		width: 'device-width',
+		initialScale: 1,
+		minimumScale: 1,
+	},
 };
 
 const links = [
