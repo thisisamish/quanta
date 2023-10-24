@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Member {
+  rollNo            String       @id @map("memberId") @db.Char(13)
+  name              String       @db.VarChar(50)
+  email             String       @unique
+  phone             String       @db.Char(10)
+  username          String       @unique
+  gradYear          Int          @db.Year
+  quantaJoiningYear Int          @db.Year
+  socialLinks       SocialLink[]
+  profilePic        String       @db.VarChar(2083)
+  designation       Designation
+  PostHolder        PostHolder?
+
+  @@unique([rollNo, gradYear])
+}
+
+model PostHolder {
+  rollNo   String @unique @map("memberId") @db.Char(13)
+  gradYear Int    @db.Year
+  post     Post
+  member   Member @relation(fields: [rollNo, gradYear], references: [rollNo, gradYear])
+
+  @@unique([gradYear, post])
+  @@unique([rollNo, gradYear])
+}
+
+enum Post {
+  GENERAL_SECRETARY
+  VICE_PRESIDENT
+  CTC
+  DESIGN_HEAD
+  MANAGEMENT_HEAD
+  TECHNICAL_HEAD
+  FINANCE_HEAD
+  WEB_HEAD
+}
+
+enum Designation {
+  TECHNICAL_TEAM_MEMBER
+  DESIGN_TEAM_MEMBER
+  WEB_TEAM_MEMBER
+}
+
+model SocialLink {
+  rollNo          String @unique @map("memberId")
+  instagram       String @unique @db.VarChar(50)
+  linkedin        String @unique @db.VarChar(50)
+  github          String @unique @db.VarChar(50)
+  dribble         String @unique @db.VarChar(50)
+  behance         String @unique @db.VarChar(50)
+  personalWebsite String @unique @db.VarChar(50)
+  blog            String @unique @db.VarChar(50)
+  member          Member @relation(fields: [rollNo], references: [rollNo])
+}
