@@ -3,7 +3,8 @@
 // TODOS: Shift Register button to the main area on mobile because it is too cluttered
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+
+import * as motion from '../lib/framer';
 
 interface MenuItem {
 	id: number;

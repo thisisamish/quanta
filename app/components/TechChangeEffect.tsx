@@ -1,4 +1,6 @@
-import { motion } from 'framer-motion';
+'use client';
+
+import * as motion from '../lib/framer';
 import { useEffect, useState } from 'react';
 
 const words = ['Robotics', 'Machine Learning', 'Arduino', 'Figma', 'React'];
