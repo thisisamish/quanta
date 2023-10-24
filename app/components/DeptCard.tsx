@@ -10,7 +10,7 @@ type Props = {
 
 const DeptCard = ({ id, title, description, icon, image }: Props) => {
 	return (
-		<div className="w-96 px-10 py-5 flex flex-col items-center justify-center gap-8 rounded-2xl border border-[rgba(255,255,255,0.11)] relative top-0 left-0 pointer-events-none">
+		<div className="max-w-[23rem] px-10 py-5 flex flex-col items-center justify-center gap-8 rounded-2xl border border-[rgba(255,255,255,0.11)] relative top-0 left-0 pointer-events-none">
 			<div className="absolute top-0 h-[1px] w-[70%] opacity-70 bg-gradient-to-r from-[rgba(153,238,255,0)] via-white to-[rgba(255,255,255,0)]"></div>
 			<div className="flex flex-col items-center gap-3">
 				{icon()}

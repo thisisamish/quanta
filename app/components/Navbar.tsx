@@ -22,7 +22,7 @@ const Navbar = ({ links }: { links: MenuItem[] }) => {
 				duration: 0.95,
 				ease: [0.165, 0.84, 0.44, 1],
 			}}
-			className="navbar bg-base-100"
+			className="navbar bg-base-100 z-50 max-w-6xl mx-auto"
 		>
 			<div className="navbar-start">
 				<div className="dropdown">
@@ -91,12 +91,12 @@ const Navbar = ({ links }: { links: MenuItem[] }) => {
 				</ul>
 			</div>
 			<div className="navbar-end">
-				<Link
+				{/* <Link
 					href={links[links.length - 1].href}
 					className="bg-blue-600 rounded-xl text-white px-4 py-3 ml-4 hover:bg-blue-500 transition"
 				>
 					{links[links.length - 1].name}
-				</Link>
+				</Link> */}
 			</div>
 		</motion.div>
 	);

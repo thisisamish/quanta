@@ -1,5 +1,6 @@
-import { LinkedIn, Instagram, Twitter } from './Icons';
 import Link from 'next/link';
+
+import { Instagram, LinkedIn, Twitter } from './Icons';
 
 const Footer = () => {
 	return (

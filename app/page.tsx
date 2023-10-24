@@ -7,7 +7,6 @@ import Footer from './components/Footer';
 import HoverEffect from './components/HoverEffect';
 import { Design, Technical, Web } from './components/Icons';
 import SquigglyLines from './components/SquigglyLines';
-// import GlitchEffect from './components/GlitchEffect';
 import TechChangeEffect from './components/TechChangeEffect';
 import * as motion from './lib/framer';
 
@@ -41,9 +40,8 @@ const deptData = [
 export default function HomePage() {
 	return (
 		<>
-			<div className="flex max-w-6xl mx-auto flex-col items-center justify-center py-2 h-screen bg-background">
+			<div className="min-h-[30rem] mb-10 flex max-w-6xl mx-auto flex-col items-center justify-center py-2 bg-background">
 				<HoverEffect />
-				<Navbar links={links} />
 				<main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 sm:mt-16 mt-16">
 					<motion.h1
 						initial={{ opacity: 0, y: 40 }}
@@ -61,7 +59,6 @@ export default function HomePage() {
 							Imagination
 						</span>{' '}
 					</motion.h1>
-					{/* with <GlitchEffect /> */}
 					<motion.span
 						initial={{ opacity: 0, y: 40 }}
 						animate={{ opacity: 1, y: 0 }}
@@ -91,8 +88,8 @@ export default function HomePage() {
 					</motion.h2>
 				</main>
 			</div>
-			<div className="min-h-screen flex justify-center items-center">
-				<div className="mx-auto px-2 max-w-6xl flex flex-col lg:flex-row gap-4 lg:gap-8 justify-center items-center">
+			<div className="min-h-[40rem] mb-10 flex justify-center items-center">
+				<div className="mx-auto px-4 max-w-6xl flex flex-col lg:flex-row gap-4 lg:gap-8 justify-center items-center">
 					<Image
 						src={team}
 						alt="quanta team picture"
@@ -115,8 +112,9 @@ export default function HomePage() {
 					</div>
 				</div>
 			</div>
-			<div className="min-h-screen flex items-center justify-center">
-				<div className="flex flex-wrap gap-8">
+			<div className="min-h-[40rem] mb-10 flex flex-col items-center justify-center px-4">
+				<h2 className="text-4xl font-extrabold mb-8">Our Clubs</h2>
+				<div className="flex flex-wrap items-center justify-center gap-4 md:gap-8">
 					{deptData.map((dept) => (
 						<DeptCard key={dept.id} {...dept} />
 					))}
