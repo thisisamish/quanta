@@ -3,7 +3,7 @@
 import * as motion from '../lib/framer';
 import { useEffect, useState } from 'react';
 
-const words = ['Robotics', 'Machine Learning', 'Arduino', 'Figma', 'React'];
+const words = ['Robotics', 'ML', 'Arduino', 'Figma', 'React'];
 
 const TechChangeEffect = () => {
 	const [word, setWord] = useState(words[0]);
