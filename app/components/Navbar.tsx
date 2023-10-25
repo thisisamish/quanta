@@ -1,8 +1,11 @@
+'use client';
+
 // TODOS: Add Quanta name logo for tablet and desktop
 // TODOS: Add atom logo for mobile
 // TODOS: Shift Register button to the main area on mobile because it is too cluttered
 
 import Link from 'next/link';
+import { useState } from 'react';
 
 import * as motion from '../lib/framer';
 
@@ -13,10 +16,12 @@ interface MenuItem {
 }
 
 const Navbar = ({ links }: { links: MenuItem[] }) => {
+	const [menuOpen, setMenuOpen] = useState(false);
+
 	return (
 		<motion.div
-			initial={{ opacity: 0, y: 40 }}
-			animate={{ opacity: 1, y: 0 }}
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
 			transition={{
 				delay: 0.15,
 				duration: 0.95,
@@ -26,7 +31,11 @@ const Navbar = ({ links }: { links: MenuItem[] }) => {
 		>
 			<div className="navbar-start">
 				<div className="dropdown">
-					<label tabIndex={0} className="btn btn-ghost lg:hidden">
+					<label
+						tabIndex={0}
+						className="btn btn-ghost lg:hidden"
+						onClick={() => setMenuOpen((prev) => !prev)}
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							className="h-5 w-5"
@@ -44,7 +53,9 @@ const Navbar = ({ links }: { links: MenuItem[] }) => {
 					</label>
 					<ul
 						tabIndex={0}
-						className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52 bg-blue-500"
+						className={`menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52 bg-blue-500 ${
+							menuOpen ? 'block' : 'hidden'
+						}`}
 					>
 						{links.map((link) =>
 							links.indexOf(link) === links.length - 1 ? null : (

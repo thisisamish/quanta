@@ -11,3 +11,4 @@ export const p = motion.p;
 export const main = motion.main;
 export const nav = motion.nav;
 export const footer = motion.footer;
+export const ul = motion.ul;
