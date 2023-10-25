@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 
+import * as motion from '../lib/framer';
+
 const HoverEffect = () => {
 	const blobRef = useRef<HTMLDivElement>(null);
 	useEffect(() => {
@@ -23,7 +25,17 @@ const HoverEffect = () => {
 
 	return (
 		<>
-			<div className="blob" ref={blobRef}></div>
+			<motion.div
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				transition={{
+					delay: 1,
+					duration: 0.95,
+					ease: [0.165, 0.84, 0.44, 1],
+				}}
+				className="blob"
+				ref={blobRef}
+			></motion.div>
 		</>
 	);
 };

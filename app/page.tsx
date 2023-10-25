@@ -44,8 +44,8 @@ export default function HomePage() {
 				<HoverEffect />
 				<main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 sm:mt-16 mt-16">
 					<motion.h1
-						initial={{ opacity: 0, y: 40 }}
-						animate={{ opacity: 1, y: 0 }}
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
 						transition={{
 							delay: 0.15,
 							duration: 0.95,
@@ -60,8 +60,8 @@ export default function HomePage() {
 						</span>{' '}
 					</motion.h1>
 					<motion.span
-						initial={{ opacity: 0, y: 40 }}
-						animate={{ opacity: 1, y: 0 }}
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
 						transition={{
 							delay: 0.15,
 							duration: 0.95,
@@ -73,8 +73,8 @@ export default function HomePage() {
 					</motion.span>
 					<TechChangeEffect />
 					<motion.h2
-						initial={{ opacity: 0, y: 40 }}
-						animate={{ opacity: 1, y: 0 }}
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
 						transition={{
 							delay: 0.15,
 							duration: 0.95,
