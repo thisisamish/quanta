@@ -17,6 +17,7 @@ interface MenuItem {
 
 const Navbar = ({ links }: { links: MenuItem[] }) => {
 	const [menuOpen, setMenuOpen] = useState(false);
+	const [activeLink, setActiveLink] = useState(0);
 
 	return (
 		<motion.div
@@ -71,9 +72,8 @@ const Navbar = ({ links }: { links: MenuItem[] }) => {
 						)}
 					</ul>
 				</div>
-				<a className="btn btn-ghost">
+				<div className="p-4 w-40 lg:w-44 ">
 					<svg
-						width="145"
 						viewBox="0 0 2842 515"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -83,17 +83,24 @@ const Navbar = ({ links }: { links: MenuItem[] }) => {
 							fill="white"
 						/>
 					</svg>
-				</a>
+				</div>
 			</div>
-			<div className="navbar-center hidden lg:flex">
-				<ul className="menu menu-horizontal px-1">
+			<div className="navbar-end hidden lg:flex">
+				<ul className="flex">
 					{links.map((link) =>
 						links.indexOf(link) === links.length - 1 ? null : (
 							<li key={link.id}>
 								<Link
 									href={link.href}
-									className="rounded-xl hover:text-black font-medium px-4 py-3 hover:bg-blue-300 transition"
+									className="ml-2 p-2 relative"
+									onClick={() => setActiveLink(link.id)}
 								>
+									<span
+										className={`${
+											activeLink === link.id &&
+											'absolute bottom-0 left-0 h-[1px] w-full opacity-70 bg-gradient-to-r from-[rgba(153,238,255,0)] via-white to-[rgba(255,255,255,0)]'
+										}`}
+									></span>
 									{link.name}
 								</Link>
 							</li>
@@ -101,14 +108,14 @@ const Navbar = ({ links }: { links: MenuItem[] }) => {
 					)}
 				</ul>
 			</div>
-			<div className="navbar-end">
-				{/* <Link
+			{/* <div className="navbar-end"> */}
+			{/* <Link
 					href={links[links.length - 1].href}
 					className="bg-blue-600 rounded-xl text-white px-4 py-3 ml-4 hover:bg-blue-500 transition"
 				>
 					{links[links.length - 1].name}
 				</Link> */}
-			</div>
+			{/* </div> */}
 		</motion.div>
 	);
 };
