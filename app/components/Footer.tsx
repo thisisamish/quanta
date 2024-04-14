@@ -120,7 +120,7 @@ const Footer = () => {
 			</div>
 			<div className="opacity-75 flex justify-between py-8">
 				<p>&copy; {new Date().getFullYear()} Quanta</p>
-				<p>Go to top</p>
+				<button>Go to top ↑</button>
 			</div>
 		</div>
 	);

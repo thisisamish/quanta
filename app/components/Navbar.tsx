@@ -59,18 +59,16 @@ const Navbar = ({ links }: { links: MenuItem[] }) => {
 							menuOpen ? 'block' : 'hidden'
 						}`}
 					>
-						{links.map((link) =>
-							links.indexOf(link) === links.length - 1 ? null : (
-								<li key={link.id}>
-									<Link
-										href={link.href}
-										className="rounded-xl hover:text-black font-medium px-4 py-3 hover:bg-blue-300 transition"
-									>
-										{link.name}
-									</Link>
-								</li>
-							)
-						)}
+						{links.map((link) => (
+							<li key={link.id}>
+								<Link
+									href={link.href}
+									className="rounded-xl hover:text-black font-medium px-4 py-3 hover:bg-blue-300 transition"
+								>
+									{link.name}
+								</Link>
+							</li>
+						))}
 					</ul>
 				</div>
 				<div className="p-4 w-40 lg:w-44 ">
@@ -91,24 +89,22 @@ const Navbar = ({ links }: { links: MenuItem[] }) => {
 			{/* Desktop Navbar */}
 			<div className="navbar-end hidden lg:flex">
 				<ul className="flex">
-					{links.map((link) =>
-						links.indexOf(link) === links.length - 1 ? null : (
-							<li key={link.id}>
-								<Link
-									href={link.href}
-									className="ml-2 p-2 relative"
-								>
-									<span
-										className={`${
-											path === link.href &&
-											'absolute bottom-0 left-0 h-[1px] w-full opacity-70 bg-gradient-to-r from-[rgba(153,238,255,0)] via-white to-[rgba(255,255,255,0)]'
-										}`}
-									></span>
-									{link.name}
-								</Link>
-							</li>
-						)
-					)}
+					{links.map((link) => (
+						<li key={link.id}>
+							<Link
+								href={link.href}
+								className="ml-2 p-2 relative"
+							>
+								<span
+									className={`${
+										path === link.href &&
+										'absolute bottom-0 left-0 h-[1px] w-full opacity-70 bg-gradient-to-r from-[rgba(153,238,255,0)] via-white to-[rgba(255,255,255,0)]'
+									}`}
+								></span>
+								{link.name}
+							</Link>
+						</li>
+					))}
 				</ul>
 			</div>
 			{/* <div className="navbar-end"> */}

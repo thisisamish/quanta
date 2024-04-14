@@ -32,19 +32,19 @@ const links = [
 	},
 	{
 		id: 3,
-		name: 'Resources',
-		href: '/resources',
+		name: 'Events',
+		href: '/events',
 	},
-	{
-		id: 4,
-		name: 'Photo Galllery',
-		href: '/photo-gallery',
-	},
-	{
-		id: 5,
-		name: 'Register For Recruitments',
-		href: '/register',
-	},
+	// {
+	// 	id: 4,
+	// 	name: 'Photo Galllery',
+	// 	href: '/photo-gallery',
+	// },
+	// {
+	// 	id: 5,
+	// 	name: 'Register For Recruitments',
+	// 	href: '/register',
+	// },
 ];
 
 export default function RootLayout({
