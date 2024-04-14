@@ -45,7 +45,7 @@ const Footer = () => {
 					<circle cx="292.5" cy="582.5" r="41.5" fill="white" />
 				</svg> */}
 					<svg
-						width="200"
+						width="170"
 						viewBox="0 0 2842 515"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"

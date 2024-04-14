@@ -6,6 +6,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 import * as motion from '../lib/framer';
 
@@ -17,7 +18,7 @@ interface MenuItem {
 
 const Navbar = ({ links }: { links: MenuItem[] }) => {
 	const [menuOpen, setMenuOpen] = useState(false);
-	const [activeLink, setActiveLink] = useState(0);
+	const path = usePathname();
 
 	return (
 		<motion.div
@@ -74,6 +75,7 @@ const Navbar = ({ links }: { links: MenuItem[] }) => {
 				</div>
 				<div className="p-4 w-40 lg:w-44 ">
 					<svg
+						width="150"
 						viewBox="0 0 2842 515"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -85,6 +87,8 @@ const Navbar = ({ links }: { links: MenuItem[] }) => {
 					</svg>
 				</div>
 			</div>
+
+			{/* Desktop Navbar */}
 			<div className="navbar-end hidden lg:flex">
 				<ul className="flex">
 					{links.map((link) =>
@@ -93,11 +97,10 @@ const Navbar = ({ links }: { links: MenuItem[] }) => {
 								<Link
 									href={link.href}
 									className="ml-2 p-2 relative"
-									onClick={() => setActiveLink(link.id)}
 								>
 									<span
 										className={`${
-											activeLink === link.id &&
+											path === link.href &&
 											'absolute bottom-0 left-0 h-[1px] w-full opacity-70 bg-gradient-to-r from-[rgba(153,238,255,0)] via-white to-[rgba(255,255,255,0)]'
 										}`}
 									></span>
