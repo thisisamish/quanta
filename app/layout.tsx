@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 import Navbar from './components/Navbar';
 
 import type { Metadata } from 'next';
+import Footer from './components/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -58,6 +59,7 @@ export default function RootLayout({
 			>
 				<Navbar links={links} />
 				{children}
+				<Footer />
 			</body>
 		</html>
 	);

@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 import team from '../public/team.jpg';
 import DeptCard from './components/DeptCard';
-import Footer from './components/Footer';
 import HoverEffect from './components/HoverEffect';
 import { Design, Technical, Web } from './components/Icons';
 import SquigglyLines from './components/SquigglyLines';
@@ -120,7 +119,6 @@ export default function HomePage() {
 					))}
 				</div>
 			</div>
-			<Footer />
 		</>
 	);
 }
