@@ -26,7 +26,7 @@ const TeamPage = () => {
 				}}
 				className="mx-auto text-3xl font-bold tracking-normal text-gray-300 sm:text-5xl mt-32"
 			>
-				Meet The Team
+				Meet <span className="font-cursive font-normal">The Team</span>
 			</motion.h1>
 			<p className="text-center lg:text-left text-lg mb-16 mt-6 max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl sm:text-gray-400 text-gray-500">
 				Our team is a group of passionate individuals who are dedicated

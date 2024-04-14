@@ -1,12 +1,19 @@
 import './globals.css';
 
 import { Inter } from 'next/font/google';
+import { Libre_Baskerville } from 'next/font/google';
 
 import Navbar from './components/Navbar';
 
 import type { Metadata } from 'next';
 import Footer from './components/Footer';
 const inter = Inter({ subsets: ['latin'] });
+const libreBaskerville = Libre_Baskerville({
+	style: 'italic',
+	weight: '400',
+	variable: '--font-libre-baskerville',
+	subsets: ['latin'],
+});
 
 export const metadata: Metadata = {
 	title: 'Quanta JSS',
@@ -55,7 +62,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${inter.className} bg-background text-white overflow-x-hidden`}
+				className={`${inter.className} ${libreBaskerville.variable} bg-background text-white overflow-x-hidden`}
 			>
 				<Navbar links={links} />
 				{children}

@@ -9,7 +9,10 @@ const config: Config = {
 	theme: {
 		extend: {
 			colors: {
-				background: "#000",
+				background: '#000',
+			},
+			fontFamily: {
+				cursive: ['var(--font-libre-baskerville)'],
 			},
 		},
 	},
