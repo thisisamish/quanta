@@ -15,7 +15,7 @@ model Member {
   name              String       @db.VarChar(50)
   email             String       @unique
   phone             String       @db.Char(10)
-  username          String       @unique
+  username          String       @unique @db.VarChar(50)
   gradYear          Int          @db.Year
   quantaJoiningYear Int          @db.Year
   socialLinks       SocialLink[]
@@ -53,14 +53,18 @@ enum Designation {
   WEB_TEAM_MEMBER
 }
 
+// store only the usernames (except in personalWebsite and blog). create the full links on the frontend.
 model SocialLink {
-  rollNo          String @unique @map("memberId")
-  instagram       String @unique @db.VarChar(50)
-  linkedin        String @unique @db.VarChar(50)
-  github          String @unique @db.VarChar(50)
-  dribble         String @unique @db.VarChar(50)
-  behance         String @unique @db.VarChar(50)
-  personalWebsite String @unique @db.VarChar(50)
-  blog            String @unique @db.VarChar(50)
-  member          Member @relation(fields: [rollNo], references: [rollNo])
+  rollNo          String  @unique @map("memberId") @db.Char(13)
+  linktree        String? @unique @default("NA") @db.VarChar(50)
+  peerlist        String? @unique @default("NA") @db.VarChar(50)
+  instagram       String? @unique @default("NA") @db.VarChar(50)
+  x               String? @unique @default("NA") @db.VarChar(50)
+  linkedin        String  @unique @db.VarChar(50)
+  github          String? @unique @default("NA") @db.VarChar(50)
+  dribble         String? @unique @default("NA") @db.VarChar(50)
+  behance         String? @unique @default("NA") @db.VarChar(50)
+  personalWebsite String? @unique @default("NA") @db.VarChar(100)
+  blog            String? @unique @default("NA") @db.VarChar(100)
+  member          Member  @relation(fields: [rollNo], references: [rollNo])
 }
