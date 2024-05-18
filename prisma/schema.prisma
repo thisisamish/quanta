@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Member {
-  quantaId          String       @id @db.VarChar(5)
+  quantaId          String       @id @db.VarChar(6)
   rollNo            String       @unique @db.Char(13)
   name              String       @db.VarChar(50)
   email             String       @unique

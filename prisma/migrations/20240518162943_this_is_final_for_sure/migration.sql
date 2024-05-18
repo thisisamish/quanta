@@ -3,7 +3,7 @@ CREATE TYPE "Post" AS ENUM ('GENERAL_SECRETARY', 'VICE_PRESIDENT', 'CTC', 'DESIG
 
 -- CreateTable
 CREATE TABLE "Member" (
-    "quantaId" VARCHAR(5) NOT NULL,
+    "quantaId" VARCHAR(6) NOT NULL,
     "rollNo" CHAR(13) NOT NULL,
     "name" VARCHAR(50) NOT NULL,
     "email" TEXT NOT NULL,
@@ -47,6 +47,31 @@ CREATE TABLE "SocialLink" (
     CONSTRAINT "SocialLink_pkey" PRIMARY KEY ("quantaId")
 );
 
+-- CreateTable
+CREATE TABLE "Admin" (
+    "id" SERIAL NOT NULL,
+    "username" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Admin_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Event" (
+    "id" SERIAL NOT NULL,
+    "title" VARCHAR(50) NOT NULL,
+    "description" VARCHAR(500) NOT NULL,
+    "date" TIMESTAMP(3) NOT NULL,
+    "link" VARCHAR(100) NOT NULL,
+    "active" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Event_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Member_rollNo_key" ON "Member"("rollNo");
 
@@ -58,6 +83,9 @@ CREATE UNIQUE INDEX "Member_username_key" ON "Member"("username");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Member_profilePic_key" ON "Member"("profilePic");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Admin_username_key" ON "Admin"("username");
 
 -- AddForeignKey
 ALTER TABLE "PostHolder" ADD CONSTRAINT "PostHolder_quantaId_fkey" FOREIGN KEY ("quantaId") REFERENCES "Member"("quantaId") ON DELETE RESTRICT ON UPDATE CASCADE;

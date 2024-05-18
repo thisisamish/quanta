@@ -5,12 +5,33 @@ import * as motion from '../../lib/framer';
 import TeamTab from '../../components/TeamTab';
 
 const TeamPage = () => {
-	const [activeTab, setActiveTab] = useState('Executives');
+	const [activeTab, setActiveTab] = useState<TabButtonValues>('Executives');
 
-	function handleTabClick(e: React.MouseEvent<HTMLButtonElement>) {
-		const tab = e.currentTarget.textContent;
+	async function handleTabClick(e: React.MouseEvent<HTMLButtonElement>) {
+		const tab = e.currentTarget.textContent as TabButtonValues;
 		if (tab) {
 			setActiveTab(tab);
+		}
+
+		try {
+			const response = await fetch(
+				'/api/fetchTeamInfo/' + tabButtonApiCallMappings[activeTab],
+				{
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+			);
+
+			if (!response.ok) {
+				throw new Error('Failed to fetch data');
+			}
+
+			const data = await response.json();
+			console.log(data);
+		} catch (error) {
+			console.error(error);
 		}
 	}
 
@@ -60,6 +81,11 @@ const TeamPage = () => {
 					activeTab={activeTab}
 					onClick={handleTabClick}
 				/>
+				<TabButton
+					tabName="Alumni"
+					activeTab={activeTab}
+					onClick={handleTabClick}
+				/>
 			</div>
 			<TeamTab teamName={activeTab} />
 			<div className="mb-20"></div>
@@ -90,3 +116,24 @@ function TabButton({
 		</button>
 	);
 }
+
+type TabButtonValues =
+	| 'Executives'
+	| 'Year 1'
+	| 'Year 2'
+	| 'Year 3'
+	| 'Year 4'
+	| 'Alumni';
+
+type TabButtonApiCallMappings = {
+	[key in TabButtonValues]: string;
+};
+
+const tabButtonApiCallMappings: TabButtonApiCallMappings = {
+	Executives: 'executives',
+	'Year 1': '1',
+	'Year 2': '2',
+	'Year 3': '3',
+	'Year 4': '4',
+	Alumni: 'alumni',
+};
