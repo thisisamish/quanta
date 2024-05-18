@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import * as motion from '../lib/framer';
-import TeamTab from '../components/TeamTab';
+import * as motion from '../../lib/framer';
+import TeamTab from '../../components/TeamTab';
 
 const TeamPage = () => {
 	const [activeTab, setActiveTab] = useState('Executives');

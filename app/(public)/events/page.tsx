@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import * as motion from '../lib/framer';
+import * as motion from '../../lib/framer';
 
 export default function EventsPage() {
 	const [upcomingDropdown, setUpcomingDropdown] = useState(true);

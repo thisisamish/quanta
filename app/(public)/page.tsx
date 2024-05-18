@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import team from '../public/team.jpg';
-import DeptCard from './components/DeptCard';
-import HoverEffect from './components/HoverEffect';
-import { Design, Technical, Web } from './components/Icons';
-import SquigglyLines from './components/SquigglyLines';
-import TechChangeEffect from './components/TechChangeEffect';
-import * as motion from './lib/framer';
+import team from '@/public/team.jpg';
+import DeptCard from '../components/DeptCard';
+import HoverEffect from '../components/HoverEffect';
+import { Design, Technical, Web } from '../components/Icons';
+import SquigglyLines from '../components/SquigglyLines';
+import TechChangeEffect from '../components/TechChangeEffect';
+import * as motion from '../lib/framer';
 
 const deptData = [
 	{
