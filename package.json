@@ -16,7 +16,8 @@
 		"next": "13.5.4",
 		"next-cloudinary": "^4.24.0",
 		"react": "^18",
-		"react-dom": "^18"
+		"react-dom": "^18",
+		"react-hot-toast": "^2.4.1"
 	},
 	"devDependencies": {
 		"@types/bcrypt": "^5.0.2",
