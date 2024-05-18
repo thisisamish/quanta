@@ -31,7 +31,7 @@ export default function EventsPage() {
 				<span className="font-cursive font-normal">happening</span>{' '}
 				society
 			</motion.h1>
-			<p className="text-center lg:text-left text-lg mb-12 mt-6 max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl sm:text-gray-400 text-gray-500">
+			<p className="text-left text-lg mb-12 mt-6 max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl sm:text-gray-400 text-gray-500">
 				We host a variety of events throughout the year, from socials to
 				tech talks. Our events are designed to help you learn new
 				skills, meet new people, and have fun.
