@@ -3,6 +3,8 @@
 import { FormEvent, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { useContext } from 'react';
+import { AuthContext } from '@/app/lib/context';
 
 interface LoginData {
 	username: string;
@@ -12,6 +14,8 @@ interface LoginData {
 export default function AdminPage() {
 	const [username, setUsername] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
+	const { setUsername: setUname, setPassword: setPwd } =
+		useContext(AuthContext);
 
 	const router = useRouter();
 
@@ -38,6 +42,8 @@ export default function AdminPage() {
 
 			const data = await response.json();
 			toast.success('Login successful!');
+			setUname(username);
+			setPwd(password);
 			router.push('/admin/dashboard');
 		} catch (error) {
 			toast.error('Login failed!');
