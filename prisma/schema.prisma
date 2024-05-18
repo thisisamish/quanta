@@ -11,7 +11,8 @@ datasource db {
 }
 
 model Member {
-  rollNo            String       @id @map("memberId") @db.Char(13)
+  quantaId          String       @id @db.VarChar(5)
+  rollNo            String       @unique @db.Char(13)
   name              String       @db.VarChar(50)
   email             String       @unique
   phone             String       @db.Char(10)
@@ -19,21 +20,14 @@ model Member {
   gradYear          Int          @db.SmallInt
   quantaJoiningYear Int          @db.SmallInt
   socialLinks       SocialLink[]
-  profilePic        String       @db.VarChar(2083)
-  designation       Designation
+  profilePic        String       @unique @db.VarChar(2083)
   PostHolder        PostHolder?
-
-  @@unique([rollNo, gradYear])
 }
 
 model PostHolder {
-  rollNo   String @unique @map("memberId") @db.Char(13)
-  gradYear Int    @db.SmallInt
+  quantaId String @id @db.VarChar(5)
   post     Post
-  member   Member @relation(fields: [rollNo, gradYear], references: [rollNo, gradYear])
-
-  @@unique([gradYear, post])
-  @@unique([rollNo, gradYear])
+  member   Member @relation(fields: quantaId, references: quantaId)
 }
 
 enum Post {
@@ -47,24 +41,18 @@ enum Post {
   WEB_HEAD
 }
 
-enum Designation {
-  TECHNICAL_TEAM_MEMBER
-  DESIGN_TEAM_MEMBER
-  WEB_TEAM_MEMBER
-}
-
 // store only the usernames (except in personalWebsite and blog). create the full links on the frontend.
 model SocialLink {
-  rollNo          String  @unique @map("memberId") @db.Char(13)
-  linktree        String? @unique @default("NA") @db.VarChar(50)
-  peerlist        String? @unique @default("NA") @db.VarChar(50)
-  instagram       String? @unique @default("NA") @db.VarChar(50)
-  x               String? @unique @default("NA") @db.VarChar(50)
-  linkedin        String  @unique @db.VarChar(50)
-  github          String? @unique @default("NA") @db.VarChar(50)
-  dribble         String? @unique @default("NA") @db.VarChar(50)
-  behance         String? @unique @default("NA") @db.VarChar(50)
-  personalWebsite String? @unique @default("NA") @db.VarChar(100)
-  blog            String? @unique @default("NA") @db.VarChar(100)
-  member          Member  @relation(fields: [rollNo], references: [rollNo])
+  quantaId        String  @id @db.VarChar(5)
+  linktree        String? @db.VarChar(50)
+  peerlist        String? @db.VarChar(50)
+  instagram       String? @db.VarChar(50)
+  twitter         String? @db.VarChar(50)
+  linkedin        String  @db.VarChar(50)
+  github          String? @db.VarChar(50)
+  dribble         String? @db.VarChar(50)
+  behance         String? @db.VarChar(50)
+  personalWebsite String? @db.VarChar(100)
+  blog            String? @db.VarChar(100)
+  member          Member  @relation(fields: [quantaId], references: [quantaId])
 }
