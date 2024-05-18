@@ -24,17 +24,17 @@ const TeamPage = () => {
 					duration: 0.95,
 					ease: [0.165, 0.84, 0.44, 1],
 				}}
-				className="mx-auto text-3xl font-bold tracking-normal text-gray-300 sm:text-5xl mt-32"
+				className="px-4 lg:max-w-6xl mx-auto text-3xl font-bold tracking-normal text-gray-300 sm:text-5xl mt-32"
 			>
 				Meet <span className="font-cursive font-normal">The Team</span>
 			</motion.h1>
-			<p className="text-center lg:text-left text-lg mb-16 mt-6 max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl sm:text-gray-400 text-gray-500">
+			<p className="px-4 text-left text-lg mb-16 mt-6 lg:max-w-6xl mx-auto sm:text-gray-400 text-gray-500">
 				Our team is a group of passionate individuals who are dedicated
 				to creating a community that fosters learning and innovation. We
 				are committed to providing the best opportunities for our
 				members to grow and develop their skills.
 			</p>
-			<div className="mb-8">
+			<div className="px-4 mb-8">
 				<TabButton
 					tabName="Executives"
 					activeTab={activeTab}
