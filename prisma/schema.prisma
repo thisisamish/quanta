@@ -62,3 +62,11 @@ model SocialLink {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
