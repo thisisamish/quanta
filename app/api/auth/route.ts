@@ -5,49 +5,49 @@ import bcrypt from 'bcrypt';
 export async function POST(request: Request) {
 	try {
 		const data = await request.json();
+
 		const admin: Admin | null = await prisma.admin.findUnique({
 			where: { username: data.username },
 		});
 
 		if (!admin) {
-			return new Response(JSON.stringify({ error: 'Bad request' }), {
-				status: 400,
-			});
+			return new Response(
+				JSON.stringify({ error: 'Username not found' }),
+				{
+					status: 404,
+					headers: { 'Content-Type': 'application/json' },
+				}
+			);
 		}
 
-		const storedHashedPassword = admin.password;
-		const userInputPassword = data.password;
-
-		bcrypt.compare(
-			userInputPassword,
-			storedHashedPassword,
-			(err, result) => {
-				if (err) {
-					return new Response(
-						JSON.stringify({ error: 'Internal server error' }),
-						{ status: 500 }
-					);
-				}
-
-				if (result) {
-					return new Response(
-						JSON.stringify({ msg: 'LOGIN SUCCESS' }),
-						{
-							headers: { 'Content-Type': 'application/json' },
-						}
-					);
-				} else {
-					return new Response(
-						JSON.stringify({ error: 'Internal server error' }),
-						{ status: 500 }
-					);
-				}
-			}
+		const isPasswordValid = await bcrypt.compare(
+			data.password,
+			admin.password
 		);
+
+		if (isPasswordValid) {
+			return new Response(JSON.stringify({ msg: 'Login Success!' }), {
+				status: 200,
+				headers: { 'Content-Type': 'application/json' },
+			});
+		} else {
+			return new Response(
+				JSON.stringify({ error: 'Invalid credentials' }),
+				{
+					status: 401,
+					headers: { 'Content-Type': 'application/json' },
+				}
+			);
+		}
 	} catch (error) {
+		console.error('Login error:', error);
+
 		return new Response(
 			JSON.stringify({ error: 'Internal server error' }),
-			{ status: 500 }
+			{
+				status: 500,
+				headers: { 'Content-Type': 'application/json' },
+			}
 		);
 	}
 }
