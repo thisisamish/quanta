@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { Instagram, LinkedIn, Twitter } from './Icons';
+import ScrollToTopButton from './ScrollToTopButton';
 
 const Footer = () => {
 	return (
@@ -69,10 +70,10 @@ const Footer = () => {
 				<div className="col-span-1">
 					<h3 className="text-xl font-bold mb-2">Get in Touch</h3>
 					<Link
-						className="opacity-75"
+						className="opacity-75 break-words"
 						href="mailto:quanta.jssaten@gamil.com"
 					>
-						quanta.jssaten@gmail.com
+						quanta.jssaten@gmail.com ↗
 					</Link>
 				</div>
 				<div className="col-span-1 justify-self-end">
@@ -83,7 +84,7 @@ const Footer = () => {
 								href="https://www.instagram.com/jssquanta/"
 								target="_blank"
 							>
-								Instagram
+								Instagram ↗
 							</Link>
 						</li>
 						<li>
@@ -91,7 +92,7 @@ const Footer = () => {
 								href="https://in.linkedin.com/company/quanta-jss"
 								target="_blank"
 							>
-								LinkedIn
+								LinkedIn ↗
 							</Link>
 						</li>
 						{/* <li>
@@ -120,7 +121,7 @@ const Footer = () => {
 			</div>
 			<div className="opacity-75 flex justify-between py-8">
 				<p>&copy; {new Date().getFullYear()} Quanta</p>
-				<button>Go to top ↑</button>
+				<ScrollToTopButton />
 			</div>
 		</div>
 	);
