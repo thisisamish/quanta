@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DEV_DATABASE_URL")
 }
 
 model Member {
@@ -22,12 +22,16 @@ model Member {
   socialLinks       SocialLink[]
   profilePic        String       @unique @db.VarChar(2083)
   PostHolder        PostHolder?
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
 }
 
 model PostHolder {
-  quantaId String @id @db.VarChar(5)
-  post     Post
-  member   Member @relation(fields: quantaId, references: quantaId)
+  quantaId  String   @id @db.VarChar(5)
+  post      Post
+  member    Member   @relation(fields: quantaId, references: quantaId)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum Post {
@@ -43,16 +47,18 @@ enum Post {
 
 // store only the usernames (except in personalWebsite and blog). create the full links on the frontend.
 model SocialLink {
-  quantaId        String  @id @db.VarChar(5)
-  linktree        String? @db.VarChar(50)
-  peerlist        String? @db.VarChar(50)
-  instagram       String? @db.VarChar(50)
-  twitter         String? @db.VarChar(50)
-  linkedin        String  @db.VarChar(50)
-  github          String? @db.VarChar(50)
-  dribble         String? @db.VarChar(50)
-  behance         String? @db.VarChar(50)
-  personalWebsite String? @db.VarChar(100)
-  blog            String? @db.VarChar(100)
-  member          Member  @relation(fields: [quantaId], references: [quantaId])
+  quantaId        String   @id @db.VarChar(5)
+  linktree        String?  @db.VarChar(50)
+  peerlist        String?  @db.VarChar(50)
+  instagram       String?  @db.VarChar(50)
+  twitter         String?  @db.VarChar(50)
+  linkedin        String   @db.VarChar(50)
+  github          String?  @db.VarChar(50)
+  dribble         String?  @db.VarChar(50)
+  behance         String?  @db.VarChar(50)
+  personalWebsite String?  @db.VarChar(100)
+  blog            String?  @db.VarChar(100)
+  member          Member   @relation(fields: [quantaId], references: [quantaId])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
