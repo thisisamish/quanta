@@ -4,8 +4,8 @@ import { Instagram, LinkedIn, Twitter } from './Icons';
 
 const Footer = () => {
 	return (
-		<div className="max-w-6xl mx-auto">
-			<div className="sm:grid sm:grid-cols-6 sm:gap-4">
+		<div className="px-4 sm:max-w-xl md:max-w-2xl lg:max-w-6xl mx-auto">
+			<div className="flex flex-col gap-4 sm:grid sm:grid-cols-6 sm:gap-4">
 				{/* Logo */}
 				<div className="col-span-2">
 					{/* <svg
