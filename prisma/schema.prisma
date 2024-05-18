@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -16,8 +16,8 @@ model Member {
   email             String       @unique
   phone             String       @db.Char(10)
   username          String       @unique @db.VarChar(50)
-  gradYear          Int          @db.Year
-  quantaJoiningYear Int          @db.Year
+  gradYear          Int          @db.SmallInt
+  quantaJoiningYear Int          @db.SmallInt
   socialLinks       SocialLink[]
   profilePic        String       @db.VarChar(2083)
   designation       Designation
@@ -28,7 +28,7 @@ model Member {
 
 model PostHolder {
   rollNo   String @unique @map("memberId") @db.Char(13)
-  gradYear Int    @db.Year
+  gradYear Int    @db.SmallInt
   post     Post
   member   Member @relation(fields: [rollNo, gradYear], references: [rollNo, gradYear])
 
