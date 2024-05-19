@@ -76,7 +76,8 @@ model Event {
   title       String   @db.VarChar(50)
   description String   @db.VarChar(500)
   date        DateTime
-  link        String   @db.VarChar(100)
+  link        String   @db.VarChar(300)
+  posterPic   String   @db.VarChar(2083)
   active      Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

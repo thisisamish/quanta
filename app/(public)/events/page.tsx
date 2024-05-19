@@ -22,12 +22,15 @@ export default function EventsPage() {
 	async function fetchEvents(type: 'Past' | 'Upcoming'): Promise<Event[]> {
 		let data: Event[] = [];
 		try {
-			const response = await fetch('/api/fetch' + type + 'Events/', {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
+			const response = await fetch(
+				'/api/fetchEvents/' + type.toLowerCase() + '/',
+				{
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				}
+			);
 
 			if (!response.ok) {
 				throw new Error('Failed to fetch data');
