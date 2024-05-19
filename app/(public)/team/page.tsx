@@ -12,26 +12,6 @@ const TeamPage = () => {
 		if (tab) {
 			setActiveTab(tab);
 		}
-
-		try {
-			const response = await fetch(
-				'/api/fetchTeamInfo/' + tabButtonApiCallMappings[activeTab],
-				{
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				}
-			);
-
-			if (!response.ok) {
-				throw new Error('Failed to fetch data');
-			}
-
-			const data = await response.json();
-		} catch (error) {
-			console.error(error);
-		}
 	}
 
 	return (
@@ -123,16 +103,3 @@ type TabButtonValues =
 	| 'Year 3'
 	| 'Year 4'
 	| 'Alumni';
-
-type TabButtonApiCallMappings = {
-	[key in TabButtonValues]: string;
-};
-
-const tabButtonApiCallMappings: TabButtonApiCallMappings = {
-	Executives: 'executives',
-	'Year 1': '1',
-	'Year 2': '2',
-	'Year 3': '3',
-	'Year 4': '4',
-	Alumni: 'alumni',
-};

@@ -42,6 +42,27 @@ export async function GET(
 			orderBy: { name: 'asc' },
 		});
 
+		if (params.year === 'executives') {
+			const quantaIds = members.map((member) => member.quantaId);
+			let executivesIds = (
+				await prisma.postHolder.findMany({
+					where: {
+						quantaId: {
+							in: quantaIds,
+						},
+					},
+				})
+			).map((executive) => executive.quantaId);
+
+			const executives = members.filter((member) => {
+				return executivesIds.includes(member.quantaId);
+			}, {});
+
+			return new Response(JSON.stringify({ members: executives }), {
+				headers: { 'Content-Type': 'application/json' },
+			});
+		}
+
 		return new Response(JSON.stringify({ members }), {
 			headers: { 'Content-Type': 'application/json' },
 		});
@@ -55,7 +76,7 @@ export async function GET(
 
 function calculateGradYear(currentDate: Date, addYears: number) {
 	const year = currentDate.getFullYear();
-	if (currentDate.getMonth() <= 5) {
+	if (currentDate.getMonth() <= 6) {
 		return year + addYears;
 	} else {
 		return year + addYears + 1;
