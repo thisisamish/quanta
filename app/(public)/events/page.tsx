@@ -1,11 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as motion from '../../lib/framer';
+import type { Event } from '@prisma/client';
+import Image from 'next/image';
 
 export default function EventsPage() {
 	const [upcomingDropdown, setUpcomingDropdown] = useState(true);
 	const [pastDropdown, setPastDropdown] = useState(false);
+	const [upcomingEvents, setUpcomingEvents] = useState<Event[]>([]);
+	const [pastEvents, setPastEvents] = useState<Event[]>([]);
 
 	function handleUpcomingDropdownClick() {
 		setUpcomingDropdown(!upcomingDropdown);
@@ -14,6 +18,43 @@ export default function EventsPage() {
 	function handlePastDropdownClick() {
 		setPastDropdown(!pastDropdown);
 	}
+
+	async function fetchEvents(type: 'Past' | 'Upcoming'): Promise<Event[]> {
+		let data: Event[] = [];
+		try {
+			const response = await fetch('/api/fetch' + type + 'Events/', {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+
+			if (!response.ok) {
+				throw new Error('Failed to fetch data');
+			}
+
+			data = (await response.json()) as Event[];
+			console.log(data);
+			return data;
+		} catch (error) {
+			console.error(error);
+			return data;
+		}
+	}
+
+	useEffect(() => {
+		fetchEvents('Upcoming')
+			.then((data) => setUpcomingEvents(data))
+			.catch((error) =>
+				console.error('Failed to fetch upcoming events:', error)
+			);
+
+		fetchEvents('Past')
+			.then((data) => setPastEvents(data))
+			.catch((error) =>
+				console.error('Failed to fetch past events:', error)
+			);
+	}, []);
 
 	return (
 		<>
@@ -71,11 +112,11 @@ export default function EventsPage() {
 				)}
 			</button>
 			{upcomingDropdown ? (
-				<DropdownContent
-					msg={
-						'There are no upcoming events for now. Register at this link to receive updates on our future events.'
-					}
-				/>
+				upcomingEvents ? (
+					<UpcomingEvents events={upcomingEvents} />
+				) : (
+					<NoUpcomingEventsToShow />
+				)
 			) : (
 				<></>
 			)}
@@ -113,18 +154,14 @@ export default function EventsPage() {
 					</svg>
 				)}
 			</button>
-			{pastDropdown ? (
-				<DropdownContent msg={'Show past events here.'} />
-			) : (
-				<></>
-			)}
+			{pastDropdown ? <></> : <></>}
 
 			<div className="mb-28"></div>
 		</>
 	);
 }
 
-function DropdownContent({ msg }: { msg: string }) {
+function NoUpcomingEventsToShow() {
 	return (
 		<div className="px-4 py-8 text-lg flex flex-col justify-center items-center">
 			<svg
@@ -155,6 +192,61 @@ function DropdownContent({ msg }: { msg: string }) {
 			<button className="bg-blue-600 rounded-xl text-white px-4 py-3 hover:bg-blue-500 transition">
 				Send Me Updates
 			</button>
+		</div>
+	);
+}
+
+function UpcomingEvents({ events }: { events: Event[] }) {
+	return (
+		<div className="py-4 flex flex-wrap gap-4">
+			<Card
+				imgSrc={
+					'https://utfs.io/f/60fa958c-367c-4caa-8c60-91a727fad2fd-dbor74.png'
+				}
+			/>
+			<Card
+				imgSrc={
+					'https://utfs.io/f/60fa958c-367c-4caa-8c60-91a727fad2fd-dbor74.png'
+				}
+			/>
+			<Card
+				imgSrc={
+					'https://utfs.io/f/60fa958c-367c-4caa-8c60-91a727fad2fd-dbor74.png'
+				}
+			/>
+			<Card
+				imgSrc={
+					'https://utfs.io/f/60fa958c-367c-4caa-8c60-91a727fad2fd-dbor74.png'
+				}
+			/>
+		</div>
+	);
+}
+
+function Card({ imgSrc }: { imgSrc: string }) {
+	return (
+		<div className="relative flex flex-col rounded-md border border-[rgba(255,255,255,0.11)] max-w-xs hover:border-[rgba(59,130,246,0.7)] transition-all">
+			<div className="p-2 h-full w-full rounded-md">
+				<div className="absolute mx-auto h-[1px] w-3/4 opacity-70 bottom-0 left-0 right-0 bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
+				<div className="flex max-h-80">
+					<Image
+						width={250}
+						height={250}
+						className="object-cover rounded-sm max-h-full max-w-full"
+						alt=""
+						src={imgSrc}
+					/>
+				</div>
+				<div className="flex flex-col gap-4 p-2 pb-1">
+					<div>
+						<h2 className="text-xl font-semibold leading-6">
+							Guillermo Rauch
+						</h2>
+						<p className="text-sm">@rauchg</p>
+					</div>
+					<p className="text-sm">CEO, Vercel</p>
+				</div>
+			</div>
 		</div>
 	);
 }
