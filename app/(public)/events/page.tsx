@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import * as motion from '../../lib/framer';
 import type { Event } from '@prisma/client';
 import Image from 'next/image';
+import formatDate from '@/app/lib/formatDate';
+import Link from 'next/link';
 
 export default function EventsPage() {
 	const [upcomingDropdown, setUpcomingDropdown] = useState(true);
@@ -22,22 +24,18 @@ export default function EventsPage() {
 	async function fetchEvents(type: 'Past' | 'Upcoming'): Promise<Event[]> {
 		let data: Event[] = [];
 		try {
-			const response = await fetch(
-				'/api/fetchEvents/' + type.toLowerCase() + '/',
-				{
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				}
-			);
+			const response = await fetch('/api/fetchEvents/' + type + '/', {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
 
 			if (!response.ok) {
 				throw new Error('Failed to fetch data');
 			}
 
-			data = (await response.json()) as Event[];
-			console.log(data);
+			data = (await response.json()).events as Event[];
 			return data;
 		} catch (error) {
 			console.error(error);
@@ -115,7 +113,7 @@ export default function EventsPage() {
 				)}
 			</button>
 			{upcomingDropdown ? (
-				upcomingEvents ? (
+				upcomingEvents.length != 0 ? (
 					<UpcomingEvents events={upcomingEvents} />
 				) : (
 					<NoUpcomingEventsToShow />
@@ -202,33 +200,21 @@ function NoUpcomingEventsToShow() {
 function UpcomingEvents({ events }: { events: Event[] }) {
 	return (
 		<div className="py-4 flex flex-wrap gap-4">
-			<Card
-				imgSrc={
-					'https://utfs.io/f/60fa958c-367c-4caa-8c60-91a727fad2fd-dbor74.png'
-				}
-			/>
-			<Card
-				imgSrc={
-					'https://utfs.io/f/60fa958c-367c-4caa-8c60-91a727fad2fd-dbor74.png'
-				}
-			/>
-			<Card
-				imgSrc={
-					'https://utfs.io/f/60fa958c-367c-4caa-8c60-91a727fad2fd-dbor74.png'
-				}
-			/>
-			<Card
-				imgSrc={
-					'https://utfs.io/f/60fa958c-367c-4caa-8c60-91a727fad2fd-dbor74.png'
-				}
-			/>
+			{events.map((event) => (
+				<Card key={event.id} event={event} />
+			))}
 		</div>
 	);
 }
 
-function Card({ imgSrc }: { imgSrc: string }) {
+function Card({ event }: { event: Event }) {
 	return (
-		<div className="relative flex flex-col rounded-md border border-[rgba(255,255,255,0.11)] max-w-xs hover:border-[rgba(59,130,246,0.7)] transition-all">
+		<Link
+			href={event.link}
+			target="_blank"
+			rel="noopener noreferrer"
+			className="relative flex flex-col rounded-md border border-[rgba(255,255,255,0.11)] max-w-xs hover:border-[rgba(59,130,246,0.7)] transition-all"
+		>
 			<div className="p-2 h-full w-full rounded-md">
 				<div className="absolute mx-auto h-[1px] w-3/4 opacity-70 bottom-0 left-0 right-0 bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
 				<div className="flex max-h-80">
@@ -237,19 +223,24 @@ function Card({ imgSrc }: { imgSrc: string }) {
 						height={250}
 						className="object-cover rounded-sm max-h-full max-w-full"
 						alt=""
-						src={imgSrc}
+						src={event.posterPic}
 					/>
 				</div>
 				<div className="flex flex-col gap-4 p-2 pb-1">
 					<div>
 						<h2 className="text-xl font-semibold leading-6">
-							Guillermo Rauch
+							{event.title}
 						</h2>
-						<p className="text-sm">@rauchg</p>
+						<p className="text-sm">
+							{formatDate(event.date as unknown as string).date +
+								' @ ' +
+								formatDate(event.date as unknown as string)
+									.time}
+						</p>
 					</div>
-					<p className="text-sm">CEO, Vercel</p>
+					<p className="text-sm">{event.description}</p>
 				</div>
 			</div>
-		</div>
+		</Link>
 	);
 }
